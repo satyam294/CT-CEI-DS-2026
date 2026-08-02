@@ -30,6 +30,50 @@ vector_store.py         → retrieve top-k similar chunks
 rag_pipeline.py         → Groq generates an answer
 ```
 
+## Setup
+ 
+### 1. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+ 
+### 2. Get a free Groq API key
+Sign up at https://console.groq.com/keys and generate a key (starts with `gsk_`).
+ 
+### 3. Set the API key
+ 
+**Important (Windows Command Prompt users):** do **not** wrap the key in quotes — `set` stores
+quotes as part of the value, which causes an `invalid_api_key` error. PowerShell and bash/zsh
+handle quotes correctly, so quotes there are optional but safe.
+ 
+| Terminal | Command |
+|---|---|
+| **macOS / Linux (bash, zsh)** | `export GROQ_API_KEY=gsk_your_key_here` |
+| **Windows PowerShell** | `$env:GROQ_API_KEY="gsk_your_key_here"` |
+| **Windows Command Prompt (cmd)** | `set GROQ_API_KEY=gsk_your_key_here` *(no quotes!)* |
+ 
+These only last for the current terminal session — set the key again if you close and reopen
+your terminal. To make it permanent:
+- **bash/zsh**: add the `export` line to `~/.bashrc` or `~/.zshrc`
+- **PowerShell**: add the `$env:` line to your PowerShell profile, or set it permanently via
+  `[System.Environment]::SetEnvironmentVariable("GROQ_API_KEY","gsk_your_key_here","User")`
+- **cmd**: use `setx GROQ_API_KEY gsk_your_key_here` (takes effect in new terminal windows)
+Verify it's set correctly before running the pipeline:
+ 
+| Terminal | Command |
+|---|---|
+| bash / zsh | `echo $GROQ_API_KEY` |
+| PowerShell | `echo $env:GROQ_API_KEY` |
+| cmd | `echo %GROQ_API_KEY%` |
+ 
+The output should be just the raw key (`gsk_...`), with no quote marks around it.
+ 
+### 4. Add your documents
+```bash
+mkdir documents
+# drop your PDFs / .txt files into documents/
+```
+
 ## Tuning / experiments (from the project brief)
 
 All in `config.py`:
